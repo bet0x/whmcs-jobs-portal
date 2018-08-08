@@ -29,6 +29,13 @@ class Controller {
 		return $output;
 	}
 
+	// Footer content to go after all pages
+	private function footer($vars) {
+		$output = '</div>';
+
+		return $output;
+	}
+
 	// Index action
 	public function index($vars) {
 		// Get common module parameters
@@ -39,12 +46,36 @@ class Controller {
         $hrEmail = $vars['hremail'];
         $homeTabText = $vars['hometab'];
 
+        // Get data needed from DB
+        $welcomeText = Capsule::table('jobs_settings')->select('setting_val')->where('setting_id', '=', 1)->get();
+
         $output = '<h2>Change Client Welcome Text</h2>';
-		$welcomeText = Capsule::table('jobs_settings')->select('setting_val')->where('setting_id', '=', 1)->get();
 
-		$output .= '<form action="addonmodules.php?module=jobs&action=submitWelcome" method="post"><textarea rows="4" cols="100" name="welcomeText">' . $welcomeText[0] . '</textarea><br /><input type="submit" value"Submit"></input></form>';
+		$output .= '<form action="addonmodules.php?module=jobs&action=submitWelcome" method="post"><textarea rows="4" cols="100" name="welcomeText">' . $welcomeText[0] . '</textarea><br /><input type="submit" value"Submit"></input></form>
 
-		return $this->header($vars) . $output;
+			<div style="width:50%;float:left;"><h2>Quick Add Job</h2>
+				<form action="addonmodules.php?module=jobs&action=submitJobs" method="post">
+					<table class="form" width="95%" border="0" cellspacing="2" cellpadding="3">
+						<tr><td width="20%" class="fieldlabel"><label for="jobTitle"><strong>Job Title: </strong></label></td><td class="fieldarea"><input type="text" id="jobTitle" name="jobTitle"></input></td></tr>
+							<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobRef"><strong>Job Ref (Admin Use Only): </strong></label></td><td class="fieldarea"><input type="text" id="jobRef" name="jobRef"></input></td></tr>
+							<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobSalary"><strong>Job Salary: </strong></label></td><td class="fieldarea"><input type="text" id="jobSalary" name="jobSalary"></input></td></tr>
+							<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobDesc"><strong>Description: </strong></label></td><td class="fieldarea"><textarea id="jobDesc" name="jobDesc" rows="5" cols="50"></textarea></td></tr>
+							<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobDep"><strong>Department: </strong></label></td><td class="fieldarea"><input type="text" id="jobDep" name="jobDep"></input></td></tr>
+							<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobReq"><strong>Requirments: </strong></label></td><td class="fieldarea"><textarea id="jobReq" name="jobReq" rows="5" cols="50"></textarea></td></tr>
+							<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobAct"><strong>Active: </strong></label></td><td class="fieldarea"><input type="checkbox" name="jobAct" id="jobAct" value="1" checked></input></td></tr>
+					</table>
+					<input type="submit" value="Submit"></input>
+				</form>
+			</div>';
+
+		$output .= '<div style="width:50%;float:right;"><h2>Latest Applicants</h2>
+
+			<div class="tablebg"><table class="datatable" id="sortabletbl1" width="100%" border="0" cellspacing="1">
+				<tr>
+					<th><strong>Applicant ID</strong></th><th><strong>Applicant Forename</strong></th><th><strong>Applicant Surname</strong</th><th><strong>Job Applied For</strong></th>
+				</tr></table></div></div>';
+
+		return $this->header($vars) . $output . $this->footer($vars);
 	}
 }
 
