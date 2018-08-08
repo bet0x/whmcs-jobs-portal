@@ -40,7 +40,6 @@ function jobs_activate() {
 			'jobs_joblist',
 			function($table) {
 				$table->increments('job_id');
-				$table->primary('job_id');
 				$table->string('job_title');
 				$table->string('job_reference');
 				$table->text('job_description');
@@ -61,7 +60,6 @@ function jobs_activate() {
 			'jobs_applicants',
 			function($table) {
 				$table->increments('app_id');
-				$table->primary('app_id');
 				$table->string('app_fname');
 				$table->string('app_lname');
 				$table->string('app_email');
@@ -82,7 +80,6 @@ function jobs_activate() {
 			'jobs_interviews',
 			function($table) {
 				$table->increments('inter_id');
-				$table->primary('inter_id');
 				$table->integer('inter_appid');
 				$table->integer('inter_admin');
 				$table->string('inter_fname');
@@ -125,7 +122,7 @@ function jobs_activate() {
 	if ($result === true) {
 		return array('status' => 'success', 'description' => 'The addon installed successfully!');
 	} else {
-		return array('status' => 'error', 'description' => "There was an error installing the addon!<br />{$error}");
+		return array('status' => 'error', 'description' => "There was an error installing the addon!\n{$error}");
 	}
 }
 
@@ -146,7 +143,7 @@ function jobs_deactivate() {
 	if ($result === true) {
 		return array('status' => 'success', 'description' => 'The addon was successfully uninstalled!');
 	} else {
-		return array('status' => 'error', 'description' => "There was an error uninstalling the addon!<br />{$error}");
+		return array('status' => 'error', 'description' => "There was an error uninstalling the addon!\n{$error}");
 	}
 }
 
