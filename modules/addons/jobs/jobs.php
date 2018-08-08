@@ -14,6 +14,7 @@ if(!defined("WHMCS")) {
 
 // DB abstraction class
 use WHMCS\Database\Capsule;
+use WHMCS\Module\Addon\Jobs\Admin\AdminDispatcher;
 
 function jobs_config() {
 	$configArray = array(
@@ -147,7 +148,17 @@ function jobs_deactivate() {
 	}
 }
 
-function jobs_output($vars)
+function jobs_output($vars) {
+	// Get the action
+	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+
+	// Create a dispatcher
+	$dispatcher = new AdminDispatcher();
+	$response = $dispatcher->dispatch($action, $vars);
+	echo $response;
+}
+
+/*function jobs_output($vars)
 {
 $LANG = $vars['_lang'];
 $action = $_GET['action'];
@@ -490,7 +501,7 @@ echo '</table></div></div>';
 }
 
 echo '</div>';
-}
+}*/
 
 function jobs_clientarea($vars)
 {
