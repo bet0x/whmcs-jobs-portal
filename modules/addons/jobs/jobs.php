@@ -134,10 +134,10 @@ function jobs_deactivate() {
 
 	// Delete all tables
 	try {
-		Capsule::schema->drop('jobs_joblist');
-		Capsule::schema->drop('jobs_applicants');
-		Capsule::schema->drop('jobs_interviews');
-		Capsule::schema->drop('jobs_settings');
+		Capsule::schema()->drop('jobs_joblist');
+		Capsule::schema()->drop('jobs_applicants');
+		Capsule::schema()->drop('jobs_interviews');
+		Capsule::schema()->drop('jobs_settings');
 	} catch (\Exception $e) {
 		$result = false;
 		$error = $e->getMessage();
