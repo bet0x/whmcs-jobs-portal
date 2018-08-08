@@ -1,8 +1,10 @@
-WHMCS Jobs Addon v1.36 by Its My Press
+WHMCS Jobs Addon v2.0 by Matthew Watson (Envesko Services)
 
-By using this software, you agree to the terms and conditions and all license agreements set out here: http://www.itsmypress.com/terms.php
+Copyright (C) Matthew Watson - All Rights Reserved
+Unauthorized copying or modification of any of these files, via any medium, is strictly prohibited
+Proprietary and confidential
 
-========== Installation ==========
+# Installation
 
 -Upload the "jobs" folder to the following location of your WHMCS instllation: /modules/addons/
 -Login to the Admin area of your WHMCS installation and go to Setup > General Settings > Security
@@ -13,6 +15,6 @@ By using this software, you agree to the terms and conditions and all license ag
 -You can use the plugin by navigating to Addons > Jobs or going to http://yourSite.com/yourWHMCSInstallation/admin/addonmodules.php?module=jobs
 -The client area side of the addon can be viewed at http://yourSite.com/yourWHMCSInstallation/index.php?m=jobs
 
-========= Support ==========
+# Support
 
-If you have any problems with the addon, simply open up a ticket at http://www.itsmypress.com/submitticket.php?step=2&deptid=3
+If you have any problems with the addon, simply open up a ticket at https://base.envesko.com/submitticket.php?step=2&deptid=4
