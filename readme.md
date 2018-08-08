@@ -1,8 +1,8 @@
 
 WHMCS Jobs Addon v2.0 by Matthew Watson (Envesko Services)
 
-Copyright (C) Matthew Watson - All Rights Reserved
-Unauthorized copying or modification of any of these files, via any medium, is strictly prohibited
+Copyright (C) Matthew Watson - All Rights Reserved  
+Unauthorized copying or modification of any of these files, via any medium, is strictly prohibited  
 Proprietary and confidential
 
 # Installation
