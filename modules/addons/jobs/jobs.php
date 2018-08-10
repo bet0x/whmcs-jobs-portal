@@ -40,14 +40,14 @@ function jobs_activate() {
 		Capsule::schema()->create(
 			'jobs_joblist',
 			function($table) {
-				$table->increments('job_id');
-				$table->string('job_title');
-				$table->string('job_reference');
-				$table->text('job_description');
-				$table->text('job_department');
-				$table->text('job_requirments');
-				$table->text('job_salary');
-				$table->boolean('job_active');
+				$table->increments('id');
+				$table->string('title');
+				$table->string('reference');
+				$table->text('description');
+				$table->text('department');
+				$table->text('requirments');
+				$table->text('salary');
+				$table->boolean('ctive');
 			}
 		);
 	} catch (\Exception $e) {
@@ -60,14 +60,14 @@ function jobs_activate() {
 		Capsule::schema()->create(
 			'jobs_applicants',
 			function($table) {
-				$table->increments('app_id');
-				$table->string('app_fname');
-				$table->string('app_lname');
-				$table->string('app_email');
-				$table->text('app_address');
-				$table->integer('app_jobid');
-				$table->text('app_why');
-				$table->text('app_exp');
+				$table->increments('id');
+				$table->string('fname');
+				$table->string('lname');
+				$table->string('email');
+				$table->text('address');
+				$table->integer('jobid');
+				$table->text('why');
+				$table->text('experience');
 			}
 		);
 	} catch (\Exception $e) {
@@ -80,15 +80,15 @@ function jobs_activate() {
 		Capsule::schema()->create(
 			'jobs_interviews',
 			function($table) {
-				$table->increments('inter_id');
-				$table->integer('inter_appid');
-				$table->integer('inter_admin');
-				$table->string('inter_fname');
-				$table->string('inter_lname');
-				$table->datetime('inter_date');
-				$table->text('inter_trans');
-				$table->text('inter_notes');
-				$table->text('app_exp');
+				$table->increments('id');
+				$table->integer('appid');
+				$table->integer('adminid');
+				$table->string('fname');
+				$table->string('lname');
+				$table->datetime('date');
+				$table->text('trans');
+				$table->text('notes');
+				$table->text('exp');
 			}
 		);
 	} catch (\Exception $e) {

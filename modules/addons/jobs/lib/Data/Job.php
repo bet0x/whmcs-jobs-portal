@@ -12,7 +12,6 @@ use WHMCS\Database\Eloquent\Model;
 class Job extends Model {
 	// Table associated with the model
 	protected $table = 'jobs_joblist';
-	protected $primaryKey = 'job_id';
 
 	// We don't have timestamps on this table
 	public $timestamps = false;

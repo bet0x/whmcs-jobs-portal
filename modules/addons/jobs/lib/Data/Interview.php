@@ -12,7 +12,6 @@ use WHMCS\Database\Eloquent\Model;
 class Applicant extends Model {
 	// Table associated with the model
 	protected $table = 'jobs_interviews';
-	protected $primaryKey = 'inter_id';
 
 	// We don't have timestamps on this table
 	public $timestamps = false;
