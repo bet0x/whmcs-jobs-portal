@@ -89,7 +89,7 @@ class Controller {
         $modulelink = $vars['modulelink'];
         $LANG = $vars['_lang']; // An array of the currently loaded language variables
 
-		$output = '<h2>' . $LANG['addJobsWelcome'] . '</h2' . '
+		$output = '<h2>' . $LANG['addJobsWelcome'] . '</h2>' . '
 
 			<form action="addonmodules.php?module=jobs&action=submitJobs" method="post">
 				<table class="form" width="50%" border="0" cellspacing="2" cellpadding="3">
