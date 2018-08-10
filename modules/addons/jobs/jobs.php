@@ -47,7 +47,7 @@ function jobs_activate() {
 				$table->text('department');
 				$table->text('requirments');
 				$table->text('salary');
-				$table->boolean('ctive');
+				$table->boolean('active');
 			}
 		);
 	} catch (\Exception $e) {
