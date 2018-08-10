@@ -14,7 +14,11 @@ class AdminDispatcher {
 
 		// Make sure the request is valid
 		if (is_callable(array($controller, $action))) {
-			return $controller->$action($params, $post);
+			if (!empty($post)) {
+				return $controller->$action($params, $post);
+			} else {
+				return $controller->$action($params);
+			}
 		}
 
 		// If not, show an error message

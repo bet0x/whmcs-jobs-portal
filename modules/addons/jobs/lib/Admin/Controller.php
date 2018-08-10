@@ -5,6 +5,12 @@ namespace WHMCS\Module\Addon\Jobs\Admin;
 // DB abstraction class
 use WHMCS\Database\Capsule;
 
+// All addon-related DB models
+use WHMCS\Module\Addon\Jobs\Data\Job;
+use WHMCS\Module\Addon\Jobs\Data\Applicant;
+use WHMCS\Module\Addon\Jobs\Data\Interview;
+
+
 class Controller {
 
 	// Header output to go before all content
@@ -37,7 +43,7 @@ class Controller {
 	}
 
 	// Index action
-	public function index($vars) {
+	public function index($vars, $post = null) {
 		// Get common module parameters
         $modulelink = $vars['modulelink'];
         $LANG = $vars['_lang']; // An array of the currently loaded language variables
@@ -78,7 +84,7 @@ class Controller {
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
 
-	public function addJobs($vars) {
+	public function addJobs($vars, $post = null) {
 		// Get common module parameters
         $modulelink = $vars['modulelink'];
         $LANG = $vars['_lang']; // An array of the currently loaded language variables
@@ -100,8 +106,45 @@ class Controller {
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
 
-	public function submitJobs($vars) {
-		
+	public function submitJobs($vars, $post = null) {
+		// Get common module parameters
+        $modulelink = $vars['modulelink'];
+        $LANG = $vars['_lang']; // An array of the currently loaded language variables
+
+		// If no POST variables were sent, return an error
+		if (is_null($post)) {
+			return $this->header($vars) . '<div class="errorbox"><strong>Invalid data sent. Please try again.</strong></div>' . $this->footer($vars);
+		}
+
+		// Get POST vatiables needed
+		$jobTitle = $post['jobTitle'];
+		$jobRef = $post['jobRef'];
+		$jobDesc = $post['jobDesc'];
+		$jobDep = $post['jobDep'];
+		$jobReq = $post['jobReq'];
+		$jobAct = $post['jobAct'];
+		$jobSalary = $post['jobSalary'];
+
+		if ($jobAct = '') {
+			$jobAct = 0;
+		}
+
+		$job = new Job;
+		$job->title = $jobTitle;
+		$job->reference = $jobRef;
+		$job->description = $jobDesc;
+		$job->department = $jobDep;
+		$job->requirments = $jobReq;
+		$job->active = $jobAct;
+		$job->salary = $jobSalary;
+
+		try {
+			$job->save();
+		} catch (\Exception $e) {
+			return $this->header($vars) . "<div class='errorbox'><strong>{$LANG['submitJobsUnSuccess']}: {$e->getMessage()}</strong></div>" . $this->footer($vars);
+		}
+
+		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['submitJobsSuccess'] . '</div>'; . $this->footer($vars);
 	}
 }
 
