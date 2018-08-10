@@ -9,7 +9,7 @@ use WHMCS\Database\Capsule;
 use WHMCS\Database\Eloquent\Model;
 
 // https://laravel.com/docs/5.6/eloquent
-class Interview extends Model {
+class Applicant extends Model {
 	// Table associated with the model
 	protected $table = 'jobs_interviews';
 	protected $primaryKey = 'inter_id';

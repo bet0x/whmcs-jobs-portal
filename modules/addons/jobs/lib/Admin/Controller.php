@@ -99,6 +99,10 @@ class Controller {
 
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
+
+	public function submitJobs($vars) {
+		
+	}
 }
 
 ?>
