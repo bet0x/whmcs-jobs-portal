@@ -20,7 +20,7 @@ function jobs_config() {
 	$configArray = array(
 		"name" => "Jobs Portal",
 		"description" => "This addon allows you to add a job application system to your site.",
-		"version" => "2.0",
+		"version" => "2.0dev",
 		"author" => "Matthew Watson",
 		"language" => "english",
 		"fields" => array(
@@ -154,7 +154,7 @@ function jobs_output($vars) {
 
 	// Create a dispatcher
 	$dispatcher = new AdminDispatcher();
-	$response = $dispatcher->dispatch($action, $vars);
+	$response = $dispatcher->dispatch($action, $vars, $_POST);
 	echo $response;
 }
 

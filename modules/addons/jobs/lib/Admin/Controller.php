@@ -77,6 +77,28 @@ class Controller {
 
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
+
+	public function addJobs($vars) {
+		// Get common module parameters
+        $modulelink = $vars['modulelink'];
+        $LANG = $vars['_lang']; // An array of the currently loaded language variables
+
+		$output = '<h2>' . $LANG['addJobsWelcome'] . '</h2' . '
+
+			<form action="addonmodules.php?module=jobs&action=submitJobs" method="post">
+				<table class="form" width="50%" border="0" cellspacing="2" cellpadding="3">
+					<tr><td width="20%" class="fieldlabel"><label for="jobTitle"><strong>Job Title: </strong></label></td><td class="fieldarea"><input type="text" id="jobTitle" name="jobTitle"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobRef"><strong>Job Ref (Admin Use Only): </strong></label></td><td class="fieldarea"><input type="text" id="jobRef" name="jobRef"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobSalary"><strong>Job Salary: </strong></label></td><td class="fieldarea"><input type="text" id="jobSalary" name="jobSalary"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobDesc"><strong>Description: </strong></label></td><td class="fieldarea"><textarea id="jobDesc" name="jobDesc" rows="5" cols="50"></textarea></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobDep"><strong>Department: </strong></label></td><td class="fieldarea"><input type="text" id="jobDep" name="jobDep"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobReq"><strong>Requirments: </strong></label></td><td class="fieldarea"><textarea id="jobReq" name="jobReq" rows="5" cols="50"></textarea></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobAct"><strong>Active: </strong></label></td><td class="fieldarea"><input type="checkbox" name="jobAct" id="jobAct" value="1" checked></input></td></tr>
+				</table><input type="submit" value="Submit"></input>
+			</form>';
+
+		return $this->header($vars) . $output . $this->footer($vars);
+	}
 }
 
 ?>
