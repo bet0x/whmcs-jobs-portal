@@ -146,6 +146,36 @@ class Controller {
 
 		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['submitJobsSuccess'] . '</div>' . $this->footer($vars);
 	}
+
+	public function viewJobs($vars, $post = null) {
+		// Get common module parameters
+        $modulelink = $vars['modulelink'];
+        $LANG = $vars['_lang']; // An array of the currently loaded language variables
+
+        // Get all jobs in table
+        $jobs = Job::all();
+
+        $output = '<h2>' . $LANG['viewJobsWelcome'] . '</h2>
+
+			<div class="tablebg"><table class="datatable" id="sortabletbl1" width="100%" border="0" cellspacing="1">
+				<tr><th><strong>Job ID</strong></th><th><strong>Job Title</strong></th><th><strong>Job Ref</strong></th><th><strong>Job Salary</strong></th><th><strong>Job Desc</strong></th>
+				<th><strong>Job Dep.</strong></th><th><strong>Job Req</strong></th><th><strong>Job Active?</strong></th>
+				<th></th></tr>';
+
+		foreach ($jobs as $job) {
+			if ($job->active) {
+				$active = 'Yes';
+			} else {
+				$active = 'No';
+			}
+
+			$output .= '<tr><td>' . $job->id . '</td><td>' . $job->title . '</td><td>' . $job->reference . '</td><td>' . $job->salary . '</td><td>' . $job->description . '<td>' . $job->department . '</td><td>' . $job->requirments . '</td><td>' . $active . '</td><td><a href="addonmodules.php?module=jobs&action=editJobs&jobId=' . $job->id . '"><img src="\modules\addons\jobs\images\report_edit.png"></a></td></tr>';
+		}
+
+		$output .= '</table></div>';
+
+		return $this->header($vars) . $output . $this->footer($vars);
+	}
 }
 
 ?>
