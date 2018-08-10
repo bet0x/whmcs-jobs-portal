@@ -6,7 +6,7 @@ namespace WHMCS\Module\Addon\Jobs\Data;
 use WHMCS\Database\Capsule;
 
 // ORM class
-use WHMCS\Database\Eloquent\Model;
+use WHMCS\Model\AbstractModel;
 
 // https://laravel.com/docs/5.6/eloquent
 class Applicant extends Model {
