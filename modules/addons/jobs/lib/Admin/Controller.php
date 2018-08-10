@@ -144,7 +144,7 @@ class Controller {
 			return $this->header($vars) . "<div class='errorbox'><strong>{$LANG['submitJobsUnSuccess']}: {$e->getMessage()}</strong></div>" . $this->footer($vars);
 		}
 
-		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['submitJobsSuccess'] . '</div>'; . $this->footer($vars);
+		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['submitJobsSuccess'] . '</div>' . $this->footer($vars);
 	}
 }
 
