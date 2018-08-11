@@ -17,7 +17,7 @@ class AdminDispatcher {
 			if (!empty($post)) {
 				return $controller->$action($params, $post, $get);
 			} else {
-				return $controller->$action($params);
+				return $controller->$action($params, null, $get);
 			}
 		}
 

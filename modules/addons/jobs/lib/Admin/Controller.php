@@ -91,6 +91,7 @@ class Controller {
 
         // If we are editing an existing record, check it exists then add the data to the form
         if (!is_null($get) && isset($get['jobId'])) {
+        	echo 'editing';
         	// Make sure there is a job with the given ID
         	try {
         		$job = Job::findOrFail($get['jobId']);
@@ -98,6 +99,7 @@ class Controller {
         		return $this->header($vars) . '<div class="errorbox"><strong>The specified job does not exsist!</strong></div>' . $this->footer($vars);
         	}
         } else {
+        	echo 'not editing';
         	$job = new Job;
         }
 
@@ -132,7 +134,7 @@ class Controller {
 		}
 
 		// Get POST vatiables needed
-		$jobID = $post['id']
+		$jobID = $post['id'];
 		$jobTitle = $post['jobTitle'];
 		$jobRef = $post['jobRef'];
 		$jobDesc = $post['jobDesc'];
@@ -145,10 +147,10 @@ class Controller {
 			$jobAct = 0;
 		}
 
-		if ($id = '') {
+		if (empty($post['id'])) {
 			$job = new Job;
 		} else {
-			$job = Job::find($id);
+			$job = Job::find($jobID);
 		}
 		
 		$job->title = $jobTitle;
@@ -190,7 +192,7 @@ class Controller {
 				$active = 'No';
 			}
 
-			$output .= '<tr><td>' . $job->id . '</td><td>' . $job->title . '</td><td>' . $job->reference . '</td><td>' . $job->salary . '</td><td>' . $job->description . '<td>' . $job->department . '</td><td>' . $job->requirments . '</td><td>' . $active . '</td><td><a href="addonmodules.php?module=jobs&action=editJobs&jobId=' . $job->id . '"><img src="\modules\addons\jobs\images\report_edit.png"></a></td></tr>';
+			$output .= '<tr><td>' . $job->id . '</td><td>' . $job->title . '</td><td>' . $job->reference . '</td><td>' . $job->salary . '</td><td>' . $job->description . '<td>' . $job->department . '</td><td>' . $job->requirments . '</td><td>' . $active . '</td><td><a href="addonmodules.php?module=jobs&action=addJobs&jobId=' . $job->id . '"><img src="\modules\addons\jobs\images\report_edit.png"></a></td></tr>';
 		}
 
 		$output .= '</table></div>';
