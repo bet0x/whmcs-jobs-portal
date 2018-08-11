@@ -154,11 +154,11 @@ function jobs_output($vars) {
 
 	// Create a dispatcher
 	$dispatcher = new AdminDispatcher();
-	$response = $dispatcher->dispatch($action, $vars, $_POST);
+	$response = $dispatcher->dispatch($action, $vars, $_POST, $_GET);
 	echo $response;
 }
 
-/*function jobs_output($vars)
+function jobs_output($vars)
 {
 $LANG = $vars['_lang'];
 $action = $_GET['action'];

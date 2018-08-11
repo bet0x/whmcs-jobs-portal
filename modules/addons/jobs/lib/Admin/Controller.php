@@ -43,7 +43,7 @@ class Controller {
 	}
 
 	// Index action
-	public function index($vars, $post = null) {
+	public function index($vars, $post = null, $get = null) {
 		// Get common module parameters
         $modulelink = $vars['modulelink'];
         $LANG = $vars['_lang']; // An array of the currently loaded language variables
@@ -84,29 +84,44 @@ class Controller {
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
 
-	public function addJobs($vars, $post = null) {
+	public function addJobs($vars, $post = null, $get = null) {
 		// Get common module parameters
         $modulelink = $vars['modulelink'];
         $LANG = $vars['_lang']; // An array of the currently loaded language variables
 
+        // If we are editing an existing record, check it exists then add the data to the form
+        if (!is_null($get) && isset($get['jobId'])) {
+        	// Make sure there is a job with the given ID
+        	try {
+        		$job = Job::findOrFail($get['jobId']);
+        	} catch (\Exception $e) {
+        		return $this->header($vars) . '<div class="errorbox"><strong>The specified job does not exsist!</strong></div>' . $this->footer($vars);
+        	}
+        } else {
+        	$job = new Job;
+        }
+
+        $active = ($job->active == 1) ? 'checked' : '';
+
 		$output = '<h2>' . $LANG['addJobsWelcome'] . '</h2>' . '
 
 			<form action="addonmodules.php?module=jobs&action=submitJobs" method="post">
+				<input type="hidden" name="id" value="' . $job->id . '">
 				<table class="form" width="50%" border="0" cellspacing="2" cellpadding="3">
-					<tr><td width="20%" class="fieldlabel"><label for="jobTitle"><strong>Job Title: </strong></label></td><td class="fieldarea"><input type="text" id="jobTitle" name="jobTitle"></input></td></tr>
-					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobRef"><strong>Job Ref (Admin Use Only): </strong></label></td><td class="fieldarea"><input type="text" id="jobRef" name="jobRef"></input></td></tr>
-					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobSalary"><strong>Job Salary: </strong></label></td><td class="fieldarea"><input type="text" id="jobSalary" name="jobSalary"></input></td></tr>
-					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobDesc"><strong>Description: </strong></label></td><td class="fieldarea"><textarea id="jobDesc" name="jobDesc" rows="5" cols="50"></textarea></td></tr>
-					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobDep"><strong>Department: </strong></label></td><td class="fieldarea"><input type="text" id="jobDep" name="jobDep"></input></td></tr>
-					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobReq"><strong>Requirments: </strong></label></td><td class="fieldarea"><textarea id="jobReq" name="jobReq" rows="5" cols="50"></textarea></td></tr>
-					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobAct"><strong>Active: </strong></label></td><td class="fieldarea"><input type="checkbox" name="jobAct" id="jobAct" value="1" checked></input></td></tr>
+					<tr><td width="20%" class="fieldlabel"><label for="jobTitle"><strong>Job Title: </strong></label></td><td class="fieldarea"><input type="text" id="jobTitle" name="jobTitle" value="' . $job->title . '"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobRef"><strong>Job Ref (Admin Use Only): </strong></label></td><td class="fieldarea"><input type="text" id="jobRef" name="jobRef" value="' . $job->reference . '"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobSalary"><strong>Job Salary: </strong></label></td><td class="fieldarea"><input type="text" id="jobSalary" name="jobSalary" value="' . $job->salary . '"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobDesc"><strong>Description: </strong></label></td><td class="fieldarea"><textarea id="jobDesc" name="jobDesc" rows="5" cols="50">' . $job->description . '</textarea></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobDep"><strong>Department: </strong></label></td><td class="fieldarea"><input type="text" id="jobDep" name="jobDep" value="' . $job->department . '"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobReq"><strong>Requirments: </strong></label></td><td class="fieldarea"><textarea id="jobReq" name="jobReq" rows="5" cols="50">' . $job->requirments . '</textarea></td></tr>
+					<td width="20%" class="fieldlabel"><label for="jobTitle"><label for="jobAct"><strong>Active: </strong></label></td><td class="fieldarea"><input type="checkbox" name="jobAct" id="jobAct" value="1" '. $active . '></input></td></tr>
 				</table><input type="submit" value="Submit"></input>
 			</form>';
 
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
 
-	public function submitJobs($vars, $post = null) {
+	public function submitJobs($vars, $post = null, $get = null) {
 		// Get common module parameters
         $modulelink = $vars['modulelink'];
         $LANG = $vars['_lang']; // An array of the currently loaded language variables
@@ -117,6 +132,7 @@ class Controller {
 		}
 
 		// Get POST vatiables needed
+		$jobID = $post['id']
 		$jobTitle = $post['jobTitle'];
 		$jobRef = $post['jobRef'];
 		$jobDesc = $post['jobDesc'];
@@ -129,7 +145,12 @@ class Controller {
 			$jobAct = 0;
 		}
 
-		$job = new Job;
+		if ($id = '') {
+			$job = new Job;
+		} else {
+			$job = Job::find($id);
+		}
+		
 		$job->title = $jobTitle;
 		$job->reference = $jobRef;
 		$job->description = $jobDesc;
@@ -147,7 +168,7 @@ class Controller {
 		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['submitJobsSuccess'] . '</div>' . $this->footer($vars);
 	}
 
-	public function viewJobs($vars, $post = null) {
+	public function viewJobs($vars, $post = null, $get = null) {
 		// Get common module parameters
         $modulelink = $vars['modulelink'];
         $LANG = $vars['_lang']; // An array of the currently loaded language variables
