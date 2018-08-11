@@ -145,6 +145,8 @@ class Controller {
 
 		if ($jobAct = '') {
 			$jobAct = 0;
+		} else {
+			$jobAct = 1;
 		}
 
 		if (empty($post['id'])) {
