@@ -321,7 +321,7 @@ class Controller {
 		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['addInterUnSuccess'] . '</div>' . $this->footer($vars);
 	}
 
-	public function viewInter($vars, $post = null, $get = null) {
+	public function viewInterviews($vars, $post = null, $get = null) {
 		// Get common module parameters
         $modulelink = $vars['modulelink'];
         $LANG = $vars['_lang']; // An array of the currently loaded language variables
