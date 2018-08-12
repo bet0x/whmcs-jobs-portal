@@ -345,6 +345,8 @@ class Controller {
 		}
 
 		$output .= '</table></div>';
+
+		return $this->header($vars) . $output . $this->footer($vars);
 	}
 }
 
