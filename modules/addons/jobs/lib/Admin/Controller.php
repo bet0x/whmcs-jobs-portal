@@ -220,9 +220,11 @@ class Controller {
 				</tr>';
 
 		foreach ($apps as $app) {
+			$job = Job::find($app->jobid);
+
 			$output .= '
 				<tr>
-					<td>' . $appId . '</td><td>' . $appFName . '</td><td>' . $appLName . '</td><td>' . $appAddress . '<td>' . $appEmail . '</td><td>' . $appJobD . '</td><td>' . $appWhy . '</td><td>' . $appExp . '</td><td><a href="addonmodules.php?module=jobs&action=addInter&appId=' . $appId . '"><img src="\modules\addons\jobs\images\report_add.png"></a></td>
+					<td>' . $app->id . '</td><td>' . $app->fname. '</td><td>' . $app->lname . '</td><td>' . $app->address . '<td>' . $app->email . '</td><td>' . $job->title . '</td><td>' . $app->why . '</td><td>' . $app->exp . '</td><td><a href="addonmodules.php?module=jobs&action=addInter&appId=' . $app->id . '"><img src="\modules\addons\jobs\images\report_add.png"></a></td>
 				</tr>';
 		}
 
