@@ -201,6 +201,33 @@ class Controller {
 
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
+
+	public function viewApps($vars, $post = null, $get = null) {
+		// Get common module parameters
+        $modulelink = $vars['modulelink'];
+        $LANG = $vars['_lang']; // An array of the currently loaded language variables
+
+        // Get all applications in table
+        $apps = Applicant::all();
+
+        $output = '<h2>' . $LANG['viewAppsWelcome'] . '</h2>
+
+        	<div class="tablebg"><table class="datatable" id="sortabletbl1" width="100%" border="0" cellspacing="1">
+				<tr>
+					<th><strong>Applicant ID</strong></th><th><strong>Applicant Forename</strong></th><th><strong>Applicant Surname</strong</th><th><strong>Applicant Skype</strong></th><th><strong>Applicant Email</strong></th><th><strong>Job Applied For</strong></th><th><strong>Why?</strong></th><th><strong>Experince</strong></th><th></th>
+				</tr>';
+
+		foreach ($apps as $app) {
+			$output .= '
+				<tr>
+					<td>' . $appId . '</td><td>' . $appFName . '</td><td>' . $appLName . '</td><td>' . $appAddress . '<td>' . $appEmail . '</td><td>' . $appJobD . '</td><td>' . $appWhy . '</td><td>' . $appExp . '</td><td><a href="addonmodules.php?module=jobs&action=addInter&appId=' . $appId . '"><img src="\modules\addons\jobs\images\report_add.png"></a></td>
+				</tr>';
+		}
+
+		$output .= '</table></div>';
+
+		return $this->header($vars) . $output . $this->footer($vars);
+	}
 }
 
 ?>
