@@ -9,7 +9,7 @@ use WHMCS\Database\Capsule;
 use WHMCS\Model\AbstractModel;
 
 // https://laravel.com/docs/5.6/eloquent
-class Applicant extends Model {
+class Applicant extends AbstractModel {
 	// Table associated with the model
 	protected $table = 'jobs_interviews';
 
