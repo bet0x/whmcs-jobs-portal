@@ -279,7 +279,6 @@ class Controller {
         $modulelink = $vars['modulelink'];
         $LANG = $vars['_lang']; // An array of the currently loaded language variables
 
-
 		// If no POST variables were sent, return an error
 		if (is_null($post)) {
 			return $this->header($vars) . '<div class="errorbox"><strong>Invalid data sent. Please try again.</strong></div>' . $this->footer($vars);
@@ -307,7 +306,31 @@ class Controller {
 		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['addInterUnSuccess'] . '</div>' . $this->footer($vars);
 	}
 
-	
+	public function viewInter($vars, $post = null, $get = null) {
+		// Get common module parameters
+        $modulelink = $vars['modulelink'];
+        $LANG = $vars['_lang']; // An array of the currently loaded language variables
+
+        $interviews = Interview::all();
+
+        $output = '<h2>' . $LANG['viewInterWelcome'] . '</h2>
+
+			<div class="tablebg">
+				<table class="datatable" id="sortabletbl1" width="100%" border="0" cellspacing="1">
+					<tr>
+					<th><strong>Interview ID</strong></td><th><strong>Applicant ID</strong></th><th><strong>Applicant Forename</strong</th><th><strong>Applicant Surname</strong></th><th><strong>Interview Date</strong></th><th><strong>Interviewer</strong></th><th><strong>Interview Transcript</strong></th><th><strong>Interview Notes</strong></th><
+					/tr>';
+
+		foreach ($interviews as $interview) {
+			// Get the admin and applicant associated with the interview
+			$admin = Admin::find($interview->adminid);
+			$applicant = Applicant::find($interview->appid);
+
+			$output .= '<tr><td>' . $interview->id . '</td><td>' . $applicant->id . '</td><td>' . $applicant->fname . '</td><td>' . $app->lname . '<td>' . $interview->date . '</td><td>' . $admin->username . '</td><td>' . $interview->trans . '</td><td>' . $interview->notes . '</td></tr>';
+		}
+
+		$output .= '</table></div>';
+	}
 }
 
 ?>
