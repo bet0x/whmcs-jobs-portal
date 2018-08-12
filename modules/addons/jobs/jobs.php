@@ -156,7 +156,7 @@ function jobs_output($vars) {
 	echo $response;
 }
 
-function jobs_output($vars)
+/*function jobs_output($vars)
 {
 $LANG = $vars['_lang'];
 $action = $_GET['action'];

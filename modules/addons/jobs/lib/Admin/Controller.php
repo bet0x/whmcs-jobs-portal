@@ -56,6 +56,9 @@ class Controller {
 
         // Get data needed from DB
         $welcomeText = Capsule::table('jobs_settings')->select('setting_val')->where('setting_id', '=', 1)->get();
+        $apps = Applicant::orderby('id', 'desc')
+        				->take(10)
+        				->get();
 
         $output = '<h2>Change Client Welcome Text</h2>';
 
@@ -78,10 +81,20 @@ class Controller {
 
 		$output .= '<div style="width:50%;float:right;"><h2>Latest Applicants</h2>
 
-			<div class="tablebg"><table class="datatable" id="sortabletbl1" width="100%" border="0" cellspacing="1">
-				<tr>
-					<th><strong>Applicant ID</strong></th><th><strong>Applicant Forename</strong></th><th><strong>Applicant Surname</strong</th><th><strong>Job Applied For</strong></th>
-				</tr></table></div></div>';
+			<div class="tablebg">
+				<table class="datatable" id="sortabletbl1" width="100%" border="0" cellspacing="1">
+					<tr>
+						<th><strong>Applicant ID</strong></th><th><strong>Applicant Forename</strong></th><th><strong>Applicant Surname</strong</th><th><strong>Job Applied For</strong></th>
+					</tr>';
+
+		foreach ($apps as $app) {
+			$job = Job::find($app->jobid);
+
+			$output .= '<tr><td>' . $app->id. '</td><td>' . $app->fname . '</td><td>' . $app->lname . '</td><td>' . $job->title . '</td></tr>';
+		}
+
+		$output .=	'</table>
+			</div></div>';
 
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
