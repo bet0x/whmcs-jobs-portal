@@ -83,8 +83,6 @@ function jobs_activate() {
 				$table->increments('id');
 				$table->integer('appid');
 				$table->integer('adminid');
-				$table->string('fname');
-				$table->string('lname');
 				$table->datetime('date');
 				$table->text('trans');
 				$table->text('notes');
@@ -158,7 +156,7 @@ function jobs_output($vars) {
 	echo $response;
 }
 
-/*function jobs_output($vars)
+function jobs_output($vars)
 {
 $LANG = $vars['_lang'];
 $action = $_GET['action'];
