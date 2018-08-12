@@ -10,6 +10,8 @@ use WHMCS\Module\Addon\Jobs\Data\Job;
 use WHMCS\Module\Addon\Jobs\Data\Applicant;
 use WHMCS\Module\Addon\Jobs\Data\Interview;
 
+// WHMCS-provided model for tbladmins
+use WHMCS\User\Admin;
 
 class Controller {
 
@@ -225,6 +227,49 @@ class Controller {
 		}
 
 		$output .= '</table></div>';
+
+		return $this->header($vars) . $output . $this->footer($vars);
+	}
+
+	public function addInter($vars, $post = null, $get = null) {
+		// Get common module parameters
+        $modulelink = $vars['modulelink'];
+        $LANG = $vars['_lang']; // An array of the currently loaded language variables
+
+        // Make sure we have been given an ID
+		if (is_null($get) || !isset($get['appId'])) {
+			return $this->header($vars) . "<div class='errorbox'><strong>You must provide an application ID! Please try again</strong></div>" . $this->footer($vars);
+		}
+
+		$appID = $get['appId'];
+
+		// Make sure the application exists
+		try {
+			$app = Applicant::findOrFail($appID);
+		} catch (\Exception $e) {
+			return $this->header($vars) . "<div class='errorbox'><strong>The requested applicant could not be found: {$e->getMessage()}</strong></div>" . $this->footer($vars);
+		}
+
+		$admins = Admin::all();
+
+		$output = '<h2>' . $LANG['addInterWelcome'] . '</h2>
+
+			<form action="addonmodules.php?module=jobs&action=submitInter" method="post">
+				<table class="form" width="75%" border="0" cellspacing="2" cellpadding="3">
+					<td width="20%" class="fieldlabel"><label for="date"><strong>Date/time (YYYY-MM-DD HH:MM:SS): </strong></label></td><td class="fieldarea"><input type="datetime" name="date" id="date"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="admin"><strong>Admin: </strong></label></td><td class="fieldarea"><select name="admin" id="admin">';
+
+		// Add all admins to the dropdown
+		foreach ($admins as $admin) {
+			$output .= '<option value="' . $admin->username . '">' . $admin->username . '</option>';
+		}
+
+		$output .= '</select></td></tr>
+					<td width="20%" class="fieldlabel"><label for="trans"><strong>Transcript:</strong></label></td><td class="fieldarea"><textarea name="trans" id="trans" cols="100" rows="10"></textarea></td></tr>
+					<td width="20%" class="fieldlabel"><label for="notes"><strong>Notes:</strong></label></td><td class="fieldarea"><textarea name="notes" id="notes" cols="100" rows="10"></textarea></td></tr>
+				</table>
+				<input type="hidden" name="appid" id="appid" value="' . $appID . '"></input>
+				<br /><input type="submit" value="Submit"></input></form>';
 
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
