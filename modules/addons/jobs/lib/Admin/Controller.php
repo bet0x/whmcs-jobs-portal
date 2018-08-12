@@ -261,7 +261,7 @@ class Controller {
 
 		// Add all admins to the dropdown
 		foreach ($admins as $admin) {
-			$output .= '<option value="' . $admin->username . '">' . $admin->username . '</option>';
+			$output .= '<option value="' . $admin->id . '">' . $admin->username . '</option>';
 		}
 
 		$output .= '</select></td></tr>
@@ -273,6 +273,41 @@ class Controller {
 
 		return $this->header($vars) . $output . $this->footer($vars);
 	}
+
+	public function submitInter($vars, $post = null, $get = null) {
+		// Get common module parameters
+        $modulelink = $vars['modulelink'];
+        $LANG = $vars['_lang']; // An array of the currently loaded language variables
+
+
+		// If no POST variables were sent, return an error
+		if (is_null($post)) {
+			return $this->header($vars) . '<div class="errorbox"><strong>Invalid data sent. Please try again.</strong></div>' . $this->footer($vars);
+		}
+
+		$appId = $post['appid'];
+		$dateTime = $post['date'];
+		$trans = $post['trans'];
+		$admin = $post['admin'];
+		$notes = $post['notes'];
+
+		$app = new App;
+		$app->appid = $appId;
+		$app->date = $dateTime;
+		$app->trans = $trans;
+		$app->adminid = $admin;
+		$app->notes = $notes;
+
+		try {
+			$app->save();
+		} catch (\Exception $e) {
+			return $this->header($vars) . "<div class='errorbox'><strong>{$LANG['addInterSuccess']}: {$e->getMessage()}</strong></div>" . $this->footer($vars);
+		}
+
+		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['addInterUnSuccess'] . '</div>' . $this->footer($vars);
+	}
+
+	
 }
 
 ?>
