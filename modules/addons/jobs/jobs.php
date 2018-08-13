@@ -501,20 +501,15 @@ echo '</table></div></div>';
 echo '</div>';
 }*/
 
-function jobs_clientarea($vars)
-{
-$hremail = $vars['hremail'];
-$homeTabText = $vars['homeTab'];
+function jobs_clientarea($vars) {
+	// Get common module parameters
+    $modulelink = $vars['modulelink']; // eg. index.php?m=addonmodule
+    $_lang = $vars['_lang']; // an array of the currently loaded language variables
 
-$configArray = array(
-"pagetitle" => "Vacant Jobs",
-"breadcrumb" => array("index.php?m=jobs" => "Vacant Jobs"),
-"templatefile" => "jobs",
-"requirelogin" => false,
-"vars" => array("hremail" => $hremail, "homeTab" => $homeTabText)
-);
-
-return $configArray;
+    $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+    
+    $dispatcher = new ClientDispatcher();
+    return $dispatcher->dispatch($action, $vars);
 }
 
 function jobs_sidebar($vars)

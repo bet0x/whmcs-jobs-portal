@@ -19,7 +19,7 @@ class Controller {
 		return array(
 			'pagetitle'		=> 'Vacant Jobs',
 			'breadcrumb'	=> array('index.php?m=jobs' => "Vacant Jobs"),
-			'templatefile'	=> 'jobs',
+			'templatefile'	=> 'jobsIndex',
 			'requirelogin'	=> false,
 			'vars'			=> array('homeTabText' => $homeTabText, 'hrEmail' => $hrEmail)
 		);
