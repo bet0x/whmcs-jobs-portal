@@ -106,7 +106,6 @@ class Controller {
 
         // If we are editing an existing record, check it exists then add the data to the form
         if (!is_null($get) && isset($get['jobId'])) {
-        	echo 'editing';
         	// Make sure there is a job with the given ID
         	try {
         		$job = Job::findOrFail($get['jobId']);
@@ -114,7 +113,6 @@ class Controller {
         		return $this->header($vars) . '<div class="errorbox"><strong>The specified job does not exsist!</strong></div>' . $this->footer($vars);
         	}
         } else {
-        	echo 'not editing';
         	$job = new Job;
         }
 
