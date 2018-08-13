@@ -15,6 +15,7 @@ if(!defined("WHMCS")) {
 // DB abstraction class
 use WHMCS\Database\Capsule;
 use WHMCS\Module\Addon\Jobs\Admin\AdminDispatcher;
+use WHMCS\Module\Addon\Jobs\Client\ClientDispatcher;
 
 function jobs_config() {
 	$configArray = array(
@@ -507,9 +508,9 @@ function jobs_clientarea($vars) {
     $_lang = $vars['_lang']; // an array of the currently loaded language variables
 
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
-    
+
     $dispatcher = new ClientDispatcher();
-    return $dispatcher->dispatch($action, $vars);
+    return $dispatcher->dispatch($action, $vars, $_REQUEST);
 }
 
 function jobs_sidebar($vars)

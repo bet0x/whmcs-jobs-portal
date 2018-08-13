@@ -4,7 +4,7 @@ namespace WHMCS\Module\Addon\Jobs\Client;
 
 class ClientDispatcher {
 	
-	public function dispatch($action, $params) {
+	public function dispatch($action, $params, $get) {
 		// If no action is supplied then shown the index
 		if (!$action) {
 			$action = 'index';
@@ -14,7 +14,7 @@ class ClientDispatcher {
 
 		// Make sure the request is valid
 		if (is_callable(array($controller, $action))) {
-			return $controller->$action($params);
+			return $controller->$action($params, $get);
 		}
 
 		// If not, show an error message
