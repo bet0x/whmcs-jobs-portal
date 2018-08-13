@@ -158,7 +158,7 @@ class Controller {
 		$jobAct = $post['jobAct'];
 		$jobSalary = $post['jobSalary'];
 
-		if ($jobAct = '') {
+		if ($jobAct = '' || !isset($post['jobAct'])) {
 			$jobAct = 0;
 		} else {
 			$jobAct = 1;
