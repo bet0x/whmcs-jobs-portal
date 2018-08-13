@@ -40,4 +40,9 @@
 				</div>
 			</div>
 		{/foreach}
+
+		{* Show a notice if there are no active jobs in the selected department *}
+		{if $jobs|count eq 0}
+			<div class="alert alert-warning textcenter">There are no positions currently open in the {$dep} department. Please check again later.</div>
+		{/if}
 	{/if}
