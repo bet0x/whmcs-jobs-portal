@@ -339,7 +339,7 @@ class Controller {
 			$admin = Admin::find($interview->adminid);
 			$applicant = Applicant::find($interview->appid);
 
-			$output .= '<tr><td>' . $interview->id . '</td><td>' . $applicant->id . '</td><td>' . $applicant->fname . '</td><td>' . $app->lname . '<td>' . $interview->date . '</td><td>' . $admin->username . '</td><td>' . $interview->trans . '</td><td>' . $interview->notes . '</td></tr>';
+			$output .= '<tr><td>' . $interview->id . '</td><td>' . $applicant->id . '</td><td>' . $applicant->fname . '</td><td>' . $applicant->lname . '<td>' . $interview->date . '</td><td>' . $admin->username . '</td><td>' . $interview->trans . '</td><td>' . $interview->notes . '</td></tr>';
 		}
 
 		$output .= '</table></div>';
