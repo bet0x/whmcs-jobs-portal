@@ -510,7 +510,7 @@ function jobs_clientarea($vars) {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 
     $dispatcher = new ClientDispatcher();
-    return $dispatcher->dispatch($action, $vars, $_REQUEST);
+    return $dispatcher->dispatch($action, $vars, $_REQUEST, $_POST);
 }
 
 function jobs_sidebar($vars)
