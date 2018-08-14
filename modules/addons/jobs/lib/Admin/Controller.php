@@ -303,20 +303,20 @@ class Controller {
 		$admin = $post['admin'];
 		$notes = $post['notes'];
 
-		$app = new App;
-		$app->appid = $appId;
-		$app->date = $dateTime;
-		$app->trans = $trans;
-		$app->adminid = $admin;
-		$app->notes = $notes;
+		$interview = new Interview;
+		$interview->appid = $appId;
+		$interview->date = $dateTime;
+		$interview->trans = $trans;
+		$interview->adminid = $admin;
+		$interview->notes = $notes;
 
 		try {
-			$app->save();
+			$interview->save();
 		} catch (\Exception $e) {
-			return $this->header($vars) . "<div class='errorbox'><strong>{$LANG['addInterSuccess']}: {$e->getMessage()}</strong></div>" . $this->footer($vars);
+			return $this->header($vars) . "<div class='errorbox'><strong>{$LANG['addInterUnSuccess']}: {$e->getMessage()}</strong></div>" . $this->footer($vars);
 		}
 
-		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['addInterUnSuccess'] . '</div>' . $this->footer($vars);
+		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['addInterSuccess'] . '</div>' . $this->footer($vars);
 	}
 
 	public function viewInterviews($vars, $post = null, $get = null) {
