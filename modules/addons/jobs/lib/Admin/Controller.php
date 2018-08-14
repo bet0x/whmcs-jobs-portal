@@ -269,7 +269,7 @@ class Controller {
 
 			<form action="addonmodules.php?module=jobs&action=submitInter" method="post">
 				<table class="form" width="75%" border="0" cellspacing="2" cellpadding="3">
-					<td width="20%" class="fieldlabel"><label for="date"><strong>Date/time (YYYY-MM-DD HH:MM:SS): </strong></label></td><td class="fieldarea"><input type="datetime" name="date" id="date"></input></td></tr>
+					<td width="20%" class="fieldlabel"><label for="date"><strong>Date/time (YYYY-MM-DD HH:MM:SS): </strong></label></td><td class="fieldarea"><input type="datetime-local" name="date" id="date"></input></td></tr>
 					<td width="20%" class="fieldlabel"><label for="admin"><strong>Admin: </strong></label></td><td class="fieldarea"><select name="admin" id="admin">';
 
 		// Add all admins to the dropdown
