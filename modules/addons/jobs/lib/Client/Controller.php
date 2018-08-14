@@ -169,7 +169,8 @@ class Controller {
 			'requirelogin'	=> false,
 			'vars'			=> array(
 								'hrEmail' 		=> $hrEmail,
-								'app'			=> $app
+								'app'			=> $app,
+								'exp'			=> $exp
 							)
 		);
 	}

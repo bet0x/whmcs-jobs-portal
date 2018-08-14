@@ -235,7 +235,7 @@ class Controller {
 
 			$output .= '
 				<tr>
-					<td>' . $app->id . '</td><td>' . $app->fname. '</td><td>' . $app->lname . '</td><td>' . $app->address . '<td>' . $app->email . '</td><td>' . $job->title . '</td><td>' . $app->why . '</td><td>' . $app->exp . '</td><td><a href="addonmodules.php?module=jobs&action=addInter&appId=' . $app->id . '"><img src="\modules\addons\jobs\images\report_add.png"></a></td>
+					<td>' . $app->id . '</td><td>' . $app->fname. '</td><td>' . $app->lname . '</td><td>' . $app->address . '<td>' . $app->email . '</td><td>' . $job->title . '</td><td>' . $app->why . '</td><td>' . $app->experience . '</td><td><a href="addonmodules.php?module=jobs&action=addInter&appId=' . $app->id . '"><img src="\modules\addons\jobs\images\report_add.png"></a></td>
 				</tr>';
 		}
 
