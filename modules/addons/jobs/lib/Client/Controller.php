@@ -108,6 +108,10 @@ class Controller {
 	}
 
 	public function submitInfo($vars, $get = null, $post = null) {
+		// Get the settings set by the Admin
+		$homeTabText = $vars['homeTab'];
+		$hrEmail = $vars['hremail'];
+
 		// Make sure information was submitted
 		if (is_null($post) || !isset($post['jobId'])) {
 			$title = "Apply - Error";
@@ -162,6 +166,20 @@ class Controller {
 		}
 
 		// If we've gotten this far then the application has been successfully submitted
+		$job = Job::find($jobID);
+
+		// Send an email to HR notifying them of an applicant
+		$message = "{$fName} {$lName} has applied for a position at {$vars['companyname']}. Here are their details:
+				<br />
+				<br />
+				<strong>Name: </strong>{$fname} {$lName}<br />
+				<strong>Position: </strong>{$job->title}<br />
+				<br />
+				You can find the rest of their details in the Admin Control Panel.";
+		$headers = "From: {$hrEmail}\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+		mail($hrEmail, 'New Applicant Notification', $message, $headers);
+
 		return array(
 			'pagetitle'		=> $title,
 			'breadcrumb'	=> array('index.php?m=jobs' => "Vacant Jobs", "index.php?m=jobs&action=apply&job=" . $jobID => $title),
