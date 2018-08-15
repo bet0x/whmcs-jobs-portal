@@ -20,7 +20,7 @@
 
 	{* If we have the home tab selected, show the welcome text *}
 	{if $dep eq ""}
-		<p>Some welcome text</p>
+		<p>{$welcomeText}</p>
 	{/if}
 
 	{* If there are not active jobs, show an error message *}

@@ -25,8 +25,9 @@ function jobs_config() {
 		"author" => "Matthew Watson",
 		"language" => "english",
 		"fields" => array(
-			"hremail" => array("FriendlyName" => "Contact Email", "Type" => "text", "Size" => "25", "Description" => "Enter a contact email here.","Default" => "humanresoucres@example.com"),
-			"homeTab" => array("FriendlyName" => "Home Tab Text", "Type" => "text", "Size" => "25", "Description" => "Enter the text for the home tab here.", "Default" => "Home")
+			"hremail" 		=> array("FriendlyName" => "Contact Email", "Type" => "text", "Size" => "25", "Description" => "Enter a contact email here.","Default" => "humanresoucres@example.com"),
+			"homeTab" 		=> array("FriendlyName" => "Home Tab Text", "Type" => "text", "Size" => "25", "Description" => "Enter the text for the home tab here.", "Default" => "Home"),
+			"welcomeText" 	=>  array("FriendlyName" => "Welcome Text", "Type" => "textarea", "Rows" => "5", "Columns" => "50", "Description" => "Enter the message to be shown in the home tab.", "Default" => "")
 		)
 	);
 
@@ -89,30 +90,6 @@ function jobs_activate() {
 				$table->text('notes');
 				$table->text('exp');
 			}
-		);
-	} catch (\Exception $e) {
-		$result = false;
-		$error = $e->getMessage();
-	}
-
-	// Settings table
-	try {
-		Capsule::schema()->create(
-			'jobs_settings',
-			function($table) {
-				$table->increments('setting_id');
-				$table->text('setting_val');
-			}
-		);
-	} catch (\Exception $e) {
-		$result = false;
-		$error = $e->getMessage();
-	}
-
-	try {
-		// Insert a default value into all settings
-		Capsule::table('jobs_settings')->insert(
-			['setting_val' => 'Put your welcome text here.']
 		);
 	} catch (\Exception $e) {
 		$result = false;

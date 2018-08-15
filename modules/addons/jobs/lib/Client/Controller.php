@@ -28,6 +28,7 @@ class Controller {
 		// Get the settings set by the Admin
 		$homeTabText = $vars['homeTab'];
 		$hrEmail = $vars['hremail'];
+		$welcomeText = $vars['welcomeText'];
 
 		// Get all possible departments from the database
 		$departments = Capsule::table('jobs_joblist')
@@ -58,6 +59,7 @@ class Controller {
 			'requirelogin'	=> false,
 			'vars'			=> array(
 								'homeTabText' 	=> $homeTabText,
+								'welcomeText'	=> $welcomeText,
 								'dep'			=> $department,
 								'departments'	=> $departments,
 								'numActive'		=> $numActive,

@@ -60,10 +60,7 @@ class Controller {
         				->take(10)
         				->get();
 
-        $output = '<h2>Change Client Welcome Text</h2>';
-
-		$output .= '<form action="addonmodules.php?module=jobs&action=submitWelcome" method="post"><textarea rows="4" cols="100" name="welcomeText">' . $welcomeText[0] . '</textarea><br /><input type="submit" value"Submit"></input></form>
-
+		$output = '
 			<div style="width:50%;float:left;"><h2>Quick Add Job</h2>
 				<form action="addonmodules.php?module=jobs&action=submitJobs" method="post">
 					<table class="form" width="95%" border="0" cellspacing="2" cellpadding="3">
