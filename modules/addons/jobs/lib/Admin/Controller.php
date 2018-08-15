@@ -10,6 +10,9 @@ use WHMCS\Module\Addon\Jobs\Data\Job;
 use WHMCS\Module\Addon\Jobs\Data\Applicant;
 use WHMCS\Module\Addon\Jobs\Data\Interview;
 
+// License checking helper
+use WHMCS\Module\Addon\Jobs\Helper\LicenseHelper;
+
 // WHMCS-provided model for tbladmins
 use WHMCS\User\Admin;
 
@@ -17,11 +20,37 @@ class Controller {
 
 	// Header output to go before all content
 	private function header($vars) {
+		// Check that the license is valid
+		$license = $vars['license'];
+
+		$localKeyRow = Capsule::table('jobs_settings')
+							->where('setting_name', 'localkey')
+							->get();
+
+		$results = LicenseHelper::checkLicense($license, $localKeyRow->setting_val);
+
+		if ($results['status'] != 'Active') {
+			// Show an error message if the license is not active
+			return "<div class='errorbox'><strong>The license key is {$results['status']}</strong></div>";
+			die();
+		}
+
+		// If it is valid, get the local key and store it in the DB
+		$localKey = $results['localkey'];
+		try {
+			// Insert a default value into the setting for the local key
+			Capsule::table('jobs_settings')
+					->where('setting_name', 'localkey')
+					->update(['setting_val' => $localKey]);
+		} catch (\Exception $e) {
+			return "<div class='errorbox'><strong>Error updating localkey: {$e->getMessage()}</strong></div>";
+		}
+
 		$output = '<link rel="stylesheet" type="text/css" href="\modules\addons\jobs\style.css">
 
 		<div class="jobs">
 
-		<div class="adminbar"
+		<div class="adminbar">
 		<a href="addonmodules.php?module=jobs"><img src="\modules\addons\jobs\images\computer.png"> Home</a>
 		<a href="addonmodules.php?module=jobs&action=viewJobs"><img src="\modules\addons\jobs\images\report_user.png"> View Jobs</img></a>
 		<a href="addonmodules.php?module=jobs&action=viewApps"><img src="\modules\addons\jobs\images\group.png"> View Applicants</a>
@@ -54,8 +83,6 @@ class Controller {
         $hrEmail = $vars['hremail'];
         $homeTabText = $vars['hometab'];
 
-        // Get data needed from DB
-        $welcomeText = Capsule::table('jobs_settings')->select('setting_val')->where('setting_id', '=', 1)->get();
         $apps = Applicant::orderby('id', 'desc')
         				->take(10)
         				->get();

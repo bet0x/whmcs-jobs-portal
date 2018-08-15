@@ -12,6 +12,9 @@ if(!defined("WHMCS")) {
 	die("This file cannot be directly accessed.");
 }
 
+// Include the license checking function
+include 'licenseCheck.php';
+
 // DB abstraction class
 use WHMCS\Database\Capsule;
 use WHMCS\Module\Addon\Jobs\Admin\AdminDispatcher;
@@ -25,7 +28,8 @@ function jobs_config() {
 		"author" => "Matthew Watson",
 		"language" => "english",
 		"fields" => array(
-			"hremail" 		=> array("FriendlyName" => "Contact Email", "Type" => "text", "Size" => "25", "Description" => "Enter a contact email here.","Default" => "humanresoucres@example.com"),
+			"license"		=> array("FriendlyName" => "License Key", "Type" => "text", "Size" => "35", "Description" => "Enter your license key here.", "Default" => ""),
+			"hremail" 		=> array("FriendlyName" => "Contact Email", "Type" => "text", "Size" => "25", "Description" => "Enter a contact email here.", "Default" => "humanresoucres@example.com"),
 			"homeTab" 		=> array("FriendlyName" => "Home Tab Text", "Type" => "text", "Size" => "25", "Description" => "Enter the text for the home tab here.", "Default" => "Home"),
 			"welcomeText" 	=>  array("FriendlyName" => "Welcome Text", "Type" => "textarea", "Rows" => "5", "Columns" => "50", "Description" => "Enter the message to be shown in the home tab.", "Default" => "")
 		)
@@ -90,6 +94,31 @@ function jobs_activate() {
 				$table->text('notes');
 				$table->text('exp');
 			}
+		);
+	} catch (\Exception $e) {
+		$result = false;
+		$error = $e->getMessage();
+	}
+
+	// Settings table
+	try {
+		Capsule::schema()->create(
+			'jobs_settings',
+			function($table) {
+				$table->string('setting_name');
+				$table->primary('setting_name');
+				$table->text('setting_val');
+			}
+		);
+	} catch (\Exception $e) {
+		$result = false;
+		$error = $e->getMessage();
+	}
+
+ 	try {
+		// Insert a default value into the setting for the local key
+		Capsule::table('jobs_settings')->insert(
+			['setting_name' => 'localkey', 'setting_val' => '']
 		);
 	} catch (\Exception $e) {
 		$result = false;
