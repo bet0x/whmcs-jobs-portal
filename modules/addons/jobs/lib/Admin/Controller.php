@@ -18,8 +18,7 @@ use WHMCS\User\Admin;
 
 class Controller {
 
-	// Header output to go before all content
-	private function header($vars) {
+	public function __construct($vars) {
 		// Check that the license is valid
 		$license = $vars['license'];
 
@@ -30,9 +29,8 @@ class Controller {
 		$results = LicenseHelper::checkLicense($license, $localKeyRow->setting_val);
 
 		if ($results['status'] != 'Active') {
-			// Show an error message if the license is not active
-			return "<div class='errorbox'><strong>The license key is {$results['status']}</strong></div>";
-			die();
+			// Throw an error if the license is not active
+			throw new \Exception("Your license key is {$results['status']}!");
 		}
 
 		// If it is valid, get the local key and store it in the DB
@@ -43,9 +41,12 @@ class Controller {
 					->where('setting_name', 'localkey')
 					->update(['setting_val' => $localKey]);
 		} catch (\Exception $e) {
-			return "<div class='errorbox'><strong>Error updating localkey: {$e->getMessage()}</strong></div>";
+			throw new \Exception("Error updating localkey: {$e->getMessage()}");
 		}
+	}
 
+	// Header output to go before all content
+	private function header($vars) {
 		$output = '<link rel="stylesheet" type="text/css" href="\modules\addons\jobs\style.css">
 
 		<div class="jobs">
