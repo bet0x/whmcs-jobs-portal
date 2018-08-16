@@ -9,7 +9,37 @@ use WHMCS\Database\Capsule;
 use WHMCS\Module\Addon\Jobs\Data\Job;
 use WHMCS\Module\Addon\Jobs\Data\Applicant;
 
+// License checking helper
+use WHMCS\Module\Addon\Jobs\Helper\LicenseHelper;
+
 class Controller {
+
+	public function __construct($vars) {
+		// Check that the license is valid
+		$license = $vars['license'];
+
+		$localKeyRow = Capsule::table('jobs_settings')
+							->where('setting_name', 'localkey')
+							->get();
+
+		$results = LicenseHelper::checkLicense($license, $localKeyRow->setting_val);
+
+		if ($results['status'] != 'Active') {
+			// Throw an error if the license is not active
+			throw new \Exception("Your license key is {$results['status']}!");
+		}
+
+		// If it is valid, get the local key and store it in the DB
+		$localKey = $results['localkey'];
+		try {
+			// Insert a default value into the setting for the local key
+			Capsule::table('jobs_settings')
+					->where('setting_name', 'localkey')
+					->update(['setting_val' => $localKey]);
+		} catch (\Exception $e) {
+			throw new \Exception("Error updating localkey: {$e->getMessage()}");
+		}
+	}
 
 	// Throw a nice error with a custom message and breadcrumb link
 	private function error($vars, $title, $message, array $breadcrumbs) {

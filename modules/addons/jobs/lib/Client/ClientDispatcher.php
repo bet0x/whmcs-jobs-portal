@@ -10,7 +10,21 @@ class ClientDispatcher {
 			$action = 'index';
 		}
 
-		$controller = new Controller();
+		// If the license key is invalid, the constructor will throw an error
+		try {
+			$controller = new Controller($params);
+		} catch (\Exception $e) {
+			// Return an error, don't allow any further code to run
+			return array(
+				'pagetitle'		=> "Invalid License",
+				'breadcrumb'	=> array('index.php?m=jobs' => "Invalid License"),
+				'templatefile'	=> 'jobsError',
+				'requirelogin'	=> false,
+				'vars'			=> array(
+									'message'	=> "An incorrect license key is being used for the Jobs addon!"
+								)
+			);
+		}
 
 		// Make sure the request is valid
 		if (is_callable(array($controller, $action))) {
