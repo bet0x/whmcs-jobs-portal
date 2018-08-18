@@ -55,6 +55,16 @@ class Controller {
 		return $output;
 	}
 
+	private function success($title, $message) {
+		$output = "<div class='successbox'>
+						<strong><span class='title'>{$title}</span></strong>
+						<br />
+						{$message}
+					</div>";
+
+		return $output;
+	}
+
 	// Header output to go before all content
 	private function header($vars) {
 		$output = '<link rel="stylesheet" type="text/css" href="\modules\addons\jobs\style.css">
@@ -217,7 +227,7 @@ class Controller {
 			return $this->header($vars) . $this->error('Submission Unsuccessful!', "{$LANG['submitJobsUnSuccess']}: {$e->getMessage()}") . $this->footer($vars);
 		}
 
-		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['submitJobsSuccess'] . '</div>' . $this->footer($vars);
+		return $this->header($vars) . $this->success('Job Added!', $LANG['submitJobsSuccess']) . $this->footer($vars);
 	}
 
 	public function viewJobs($vars, $post = null, $get = null) {
@@ -351,7 +361,7 @@ class Controller {
 			return $this->header($vars) . $this->error('Submission Unsuccessful!', "{$LANG['addInterUnSuccess']}: {$e->getMessage()}") . $this->footer($vars);
 		}
 
-		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['addInterSuccess'] . '</div>' . $this->footer($vars);
+		return $this->header($vars) . $this->success('Interview Added!', $LANG['addInterSuccess']) . $this->footer($vars);
 	}
 
 	public function viewInterviews($vars, $post = null, $get = null) {
