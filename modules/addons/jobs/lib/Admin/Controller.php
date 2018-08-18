@@ -45,6 +45,14 @@ class Controller {
 		}
 	}
 
+	private function error($title, $message) {
+		$output = "<div class='errorbox'><strong><span class='title'>{$title}</span></strong>
+					<br />
+					{$message}";
+
+		return $output;
+	}
+
 	// Header output to go before all content
 	private function header($vars) {
 		$output = '<link rel="stylesheet" type="text/css" href="\modules\addons\jobs\style.css">
@@ -135,7 +143,7 @@ class Controller {
         	try {
         		$job = Job::findOrFail($get['jobId']);
         	} catch (\Exception $e) {
-        		return $this->header($vars) . '<div class="errorbox"><strong>The specified job does not exsist!</strong></div>' . $this->footer($vars);
+        		return $this->header($vars) . $this->error('Job Not Found!', 'The specified job does not exsist!') . $this->footer($vars);
         	}
         } else {
         	$job = new Job;
@@ -168,7 +176,7 @@ class Controller {
 
 		// If no POST variables were sent, return an error
 		if (is_null($post)) {
-			return $this->header($vars) . '<div class="errorbox"><strong>Invalid data sent. Please try again.</strong></div>' . $this->footer($vars);
+			return $this->header($vars) . $this->error('An Error Occurred!', 'Invalid data sent. Please try again.') . $this->footer($vars);
 		}
 
 		// Get POST vatiables needed
@@ -204,7 +212,7 @@ class Controller {
 		try {
 			$job->save();
 		} catch (\Exception $e) {
-			return $this->header($vars) . "<div class='errorbox'><strong>{$LANG['submitJobsUnSuccess']}: {$e->getMessage()}</strong></div>" . $this->footer($vars);
+			return $this->header($vars) . $this->error('Submission Unsuccessful!', "{$LANG['submitJobsUnSuccess']}: {$e->getMessage()}" . $this->footer($vars);
 		}
 
 		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['submitJobsSuccess'] . '</div>' . $this->footer($vars);
@@ -276,7 +284,7 @@ class Controller {
 
         // Make sure we have been given an ID
 		if (is_null($get) || !isset($get['appId'])) {
-			return $this->header($vars) . "<div class='errorbox'><strong>You must provide an application ID! Please try again</strong></div>" . $this->footer($vars);
+			return $this->header($vars) . $this->error('No Applicant Selected!', 'You must provide an application ID! Please try again.') . $this->footer($vars);
 		}
 
 		$appID = $get['appId'];
@@ -285,7 +293,7 @@ class Controller {
 		try {
 			$app = Applicant::findOrFail($appID);
 		} catch (\Exception $e) {
-			return $this->header($vars) . "<div class='errorbox'><strong>The requested applicant could not be found: {$e->getMessage()}</strong></div>" . $this->footer($vars);
+			return $this->header($vars) . $this->error('Applicant Not Found!', "The requested applicant could not be found: {$e->getMessage()}") . $this->footer($vars);
 		}
 
 		$admins = Admin::all();
@@ -319,7 +327,7 @@ class Controller {
 
 		// If no POST variables were sent, return an error
 		if (is_null($post)) {
-			return $this->header($vars) . '<div class="errorbox"><strong>Invalid data sent. Please try again.</strong></div>' . $this->footer($vars);
+			return $this->header($vars) . $this->error('Unspecified Error!', 'Invalid data sent. Please try again.') . $this->footer($vars);
 		}
 
 		$appId = $post['appid'];
@@ -338,7 +346,7 @@ class Controller {
 		try {
 			$interview->save();
 		} catch (\Exception $e) {
-			return $this->header($vars) . "<div class='errorbox'><strong>{$LANG['addInterUnSuccess']}: {$e->getMessage()}</strong></div>" . $this->footer($vars);
+			return $this->header($vars) . $this->error('Submission Unsuccessful!', "{$LANG['addInterUnSuccess']}: {$e->getMessage()}") . $this->footer($vars);
 		}
 
 		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['addInterSuccess'] . '</div>' . $this->footer($vars);
