@@ -46,9 +46,11 @@ class Controller {
 	}
 
 	private function error($title, $message) {
-		$output = "<div class='errorbox'><strong><span class='title'>{$title}</span></strong>
-					<br />
-					{$message}";
+		$output = "<div class='errorbox'>
+						<strong><span class='title'>{$title}</span></strong>
+						<br />
+						{$message}
+					</div>";
 
 		return $output;
 	}
@@ -212,7 +214,7 @@ class Controller {
 		try {
 			$job->save();
 		} catch (\Exception $e) {
-			return $this->header($vars) . $this->error('Submission Unsuccessful!', "{$LANG['submitJobsUnSuccess']}: {$e->getMessage()}" . $this->footer($vars);
+			return $this->header($vars) . $this->error('Submission Unsuccessful!', "{$LANG['submitJobsUnSuccess']}: {$e->getMessage()}") . $this->footer($vars);
 		}
 
 		return $this->header($vars) . '<div class="successbox"><strong>Job Added</strong><br />' . $LANG['submitJobsSuccess'] . '</div>' . $this->footer($vars);
