@@ -1,21 +1,14 @@
 <?php
 
-function jobs_show($vars)
-{
-	$query = "SELECT `setting_val` FROM `jobs_settings`";
-	$data = mysql_query($query);
-	if (!mysql_num_rows($data))
-	{
-		$isactive = 0;
+function jobs_addCSS($vars) {
+	// Include our CSS file on all jobs client-side pages
+	
+	// If the homeTabText Smarty variable is set, then we are on a jobs addon page
+	if (isset($vars['homeTabText'])) {
+		return '<link href="modules/addons/jobs/clientStyle.css" rel="stylesheet" type="text/css" />';
 	}
-	else
-	{
-		$isactive = 1;
-	}
-	$returned_values = array("jobs_isactive" => $isactive);
-	return $returned_values;
 }
 
-add_hook("ClientAreaPage",1,"jobs_show");
+add_hook('ClientAreaHeadOutput', 1, jobs_addCSS);
 
 ?>

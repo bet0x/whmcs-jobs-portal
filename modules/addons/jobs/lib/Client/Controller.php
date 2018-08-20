@@ -43,13 +43,16 @@ class Controller {
 
 	// Throw a nice error with a custom message and breadcrumb link
 	private function error($vars, $title, $message, array $breadcrumbs) {
+		$homeTabText = $vars['homeTab'];
+
 		return array(
 				'pagetitle'		=> $title,
 				'breadcrumb'	=> $breadcrumbs,
 				'templatefile'	=> 'jobsError',
 				'requirelogin'	=> false,
 				'vars'			=> array(
-									'message'	=> $message
+									'message'	=> $message,
+									'homeTabText' 	=> $homeTabText,
 								)
 			);
 	}
@@ -134,7 +137,8 @@ class Controller {
 			'requirelogin'	=> false,
 			'vars'			=> array(
 								'hrEmail' 		=> $hrEmail,
-								'job'			=> $job
+								'job'			=> $job,
+								'homeTabText' 	=> $homeTabText
 							)
 		);
 	}
@@ -220,7 +224,8 @@ class Controller {
 			'vars'			=> array(
 								'hrEmail' 		=> $hrEmail,
 								'app'			=> $app,
-								'exp'			=> $exp
+								'exp'			=> $exp,
+								'homeTabText' 	=> $homeTabText
 							)
 		);
 	}

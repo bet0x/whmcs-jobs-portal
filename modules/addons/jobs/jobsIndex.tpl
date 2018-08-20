@@ -1,7 +1,3 @@
-<div class="page-header">
-    <div class="styled_title"><h1>Job Vacancies</h1></div>
-</div>
-
 <ul class="nav nav-tabs">
 	{if $dep eq ""}
 		<li class="active"><a href="index.php?m=jobs">{$homeTabText}</a></li>
@@ -17,10 +13,9 @@
 		{/if}
 	{/foreach}
 </ul>
-
 	{* If we have the home tab selected, show the welcome text *}
 	{if $dep eq ""}
-		<p>{$welcomeText}</p>
+		<p class="padding-top">{$welcomeText}</p>
 	{/if}
 
 	{* If there are not active jobs, show an error message *}
