@@ -15,7 +15,7 @@
 </ul>
 	{* If we have the home tab selected, show the welcome text *}
 	{if $dep eq ""}
-		<p class="padding-top">{$welcomeText}</p>
+		<p class="margin-on-top">{$welcomeText}</p>
 	{/if}
 
 	{* If there are not active jobs, show an error message *}
@@ -24,14 +24,16 @@
 	{elseif $dep neq ""}
 		{* Show all jobs in the given department *}
 		{foreach $jobs as $job}
-			<div class="row"><div class="well">
-				<div class="internalpadding">
-					<h3>{$job->title}</h3>
-					<p><strong>Department: </strong>{$job->department}</p>
-					<p><strong>Salary: </strong>{$job->salary}</p>
-					<p><strong>Job Description: </strong></p><p>{$job->description}</p>
-					<p><strong>Job Requirements: </strong></p><p>{$job->requirments}</p>
-					<form><input type="button" class="btn btn-primary" onClick="parent.location='index.php?m=jobs&action=apply&job={$job->id}'" value="Apply Now"></input></form>
+			<div class="row">
+				<div class="well margin-on-top">
+					<div class="internalpadding">
+						<h3>{$job->title}</h3>
+						<p><strong>Department: </strong>{$job->department}</p>
+						<p><strong>Salary: </strong>{$job->salary}</p>
+						<p><strong>Job Description: </strong></p><p>{$job->description}</p>
+						<p><strong>Job Requirements: </strong></p><p>{$job->requirments}</p>
+						<form><input type="button" class="btn btn-primary" onClick="parent.location='index.php?m=jobs&action=apply&job={$job->id}'" value="Apply Now"></input></form>
+					</div>
 				</div>
 			</div>
 		{/foreach}
