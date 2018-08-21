@@ -331,7 +331,7 @@ class Controller {
 					<td width='20%' class='fieldlabel'><label for='trans'><strong>{$LANG['transcript']}:</strong></label></td><td class='fieldarea'><textarea name='trans' id='trans' cols='100' rows='10'></textarea></td></tr>
 					<td width='20%' class='fieldlabel'><label for='notes'><strong>{$LANG['notes']}:</strong></label></td><td class='fieldarea'><textarea name='notes' id='notes' cols='100' rows='10'></textarea></td></tr>
 				</table>
-				<input type='hidden' name='appid' id='appid' value='' . $appID . ''></input>
+				<input type='hidden' name='appid' id='appid' value='{$appID}'></input>
 				<br /><input type='submit' value='{$LANG['submit']}'></input></form>";
 
 		return $this->header($vars) . $output . $this->footer($vars);
