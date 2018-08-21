@@ -208,7 +208,7 @@ class Controller {
 		$message = "{$fName} {$lName} has applied for a position at {$vars['companyname']}. Here are their details:
 				<br />
 				<br />
-				<strong>Name: </strong>{$fname} {$lName}<br />
+				<strong>Name: </strong>{$fName} {$lName}<br />
 				<strong>Position: </strong>{$job->title}<br />
 				<br />
 				You can find the rest of their details in the Admin Control Panel.";
