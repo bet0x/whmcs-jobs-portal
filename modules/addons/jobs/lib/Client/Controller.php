@@ -173,7 +173,7 @@ class Controller {
 			$breadcrumbs = array('index.php?m=jobs' => "Vacant Jobs", "index.php?m=jobs&action=apply&job=" . $jobID => $title, "index.php?m=jobs&action=submitInfo" => "Apply - Error");
 
 			return $this->error($vars, $title, $message, $breadcrumbs);
-		} elseif ($confirm = '') {
+		} elseif ($confirm = '' || !isset($post['confirm'])) {
 			$title = "Apply - Error";
 			$message = "You did not accept our terms and conditions. Please read them and try again.";
 			$breadcrumbs = array('index.php?m=jobs' => "Vacant Jobs", "index.php?m=jobs&action=apply&job=" . $jobID => $title, "index.php?m=jobs&action=submitInfo" => "Apply - Error");
@@ -205,7 +205,7 @@ class Controller {
 		$job = Job::find($jobID);
 
 		// Send an email to HR notifying them of an applicant
-		$message = "{$fName} {$lName} has applied for a position at {$vars['companyname']}. Here are their details:
+		$message = "{$fName} {$lName} has applied for a position. Here are their details:
 				<br />
 				<br />
 				<strong>Name: </strong>{$fName} {$lName}<br />
