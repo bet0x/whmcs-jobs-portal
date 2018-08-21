@@ -381,8 +381,7 @@ class Controller {
 			<div class='tablebg'>
 				<table class='datatable' id='sortabletbl1' width='100%' border='0' cellspacing='1'>
 					<tr>
-					<th><strong>{$LANG['interID']}</strong></td><th><strong>{$LANG['appID']}</strong></th><th><strong>{$LANG['appForename']}</strong</th><th><strong>{$LANG['appSurname']}</strong></th><th><strong>{$LANG['interDate']}</strong></th><th><strong>{$LANG['interviewer']}</strong></th><th><strong>{$LANG['interTranscript']}</strong></th><th><strong>{$LANG['interNotes']}</strong></th><
-					/tr>";
+					<th><strong>{$LANG['interID']}</strong></td><th><strong>{$LANG['appID']}</strong></th><th><strong>{$LANG['appForename']}</strong</th><th><strong>{$LANG['appSurname']}</strong></th><th><strong>{$LANG['interDate']}</strong></th><th><strong>{$LANG['interviewer']}</strong></th><th><strong>{$LANG['interTranscript']}</strong></th><th><strong>{$LANG['interNotes']}</strong></th></tr>";
 
 		foreach ($interviews as $interview) {
 			// Get the admin and applicant associated with the interview
