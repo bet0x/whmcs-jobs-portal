@@ -277,7 +277,7 @@ class Controller {
 
         	<div class='tablebg'><table class='datatable' id='sortabletbl1' width='100%' border='0' cellspacing='1'>
 				<tr>
-					<th><strong>{$LANG['appID']}</strong></th><th><strong>{$LANG['appForename']}</strong></th><th><strong>{$LANG['appSurname']}</strong</th><th><strong>{$LANG['appSkype']}</strong></th><th><strong>{$LANG['appEmail']}</strong></th><th><strong>{$LANG['appJob']}</strong></th><th><strong>{$LANG['why']}</strong></th><th><strong>{$LANG['experience']}</strong></th><th></th>
+					<th><strong>{$LANG['appID']}</strong></th><th><strong>{$LANG['appForename']}</strong></th><th><strong>{$LANG['appSurname']}</strong</th><th><strong>{$LANG['appEmail']}</strong></th><th><strong>{$LANG['appJob']}</strong></th><th><strong>{$LANG['why']}</strong></th><th><strong>{$LANG['experience']}</strong></th><th></th>
 				</tr>";
 
 		foreach ($apps as $app) {
@@ -285,7 +285,7 @@ class Controller {
 
 			$output .= '
 				<tr>
-					<td>' . $app->id . '</td><td>' . $app->fname. '</td><td>' . $app->lname . '</td><td>' . $app->address . '<td>' . $app->email . '</td><td>' . $job->title . '</td><td>' . $app->why . '</td><td>' . $app->experience . '</td><td><a href="addonmodules.php?module=jobs&action=addInter&appId=' . $app->id . '"><img src="\modules\addons\jobs\images\report_add.png"></a></td>
+					<td>' . $app->id . '</td><td>' . $app->fname. '</td><td>' . $app->lname . '</td><td>' . $app->email . '</td><td>' . $job->title . '</td><td>' . $app->why . '</td><td>' . $app->experience . '</td><td><a href="addonmodules.php?module=jobs&action=addInter&appId=' . $app->id . '"><img src="\modules\addons\jobs\images\report_add.png"></a></td>
 				</tr>';
 		}
 

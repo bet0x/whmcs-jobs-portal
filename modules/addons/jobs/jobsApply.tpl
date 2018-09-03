@@ -11,11 +11,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-6 form-group">
-			<label for="skype">Skype</label><input type="text" id="skype" class="form-control" name="skype">
-		</div>
-
-		<div class="col-md-6 form-group">
+		<div class="col-md-12 form-group">
 			<label for="email">Email</label><input type="email" name="email" class="form-control" id="email">
 		</div>
 	</div>

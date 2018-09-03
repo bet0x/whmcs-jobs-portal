@@ -159,7 +159,6 @@ class Controller {
 
 		$fName = $post['fName'];
 		$lName = $post['lName'];
-		$skype = $post['skype'];
 		$email = $post['email'];
 		$jobID = $post['jobId'];
 		$why = $post['why'];
@@ -167,7 +166,7 @@ class Controller {
 		$confirm = $post['confirm'];
 
 		// Make sure all fields were completed
-		if ($fName == '' || $lName == '' || $skype == '' || $email == '' || $why == '' || $exp == '') {
+		if ($fName == '' || $lName == '' || $email == '' || $why == '' || $exp == '') {
 			$title = "Apply - Error";
 			$message = "Not all information was submitted. Please try again.";
 			$breadcrumbs = array('index.php?m=jobs' => "Vacant Jobs", "index.php?m=jobs&action=apply&job=" . $jobID => $title, "index.php?m=jobs&action=submitInfo" => "Apply - Error");
@@ -186,7 +185,6 @@ class Controller {
 		$app->fname = $fName;
 		$app->lname = $lName;
 		$app->email = $email;
-		$app->address = $skype;
 		$app->jobid = $jobID;
 		$app->why = $why;
 		$app->experience = $exp;

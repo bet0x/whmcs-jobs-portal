@@ -70,7 +70,6 @@ function jobs_activate() {
 				$table->string('fname');
 				$table->string('lname');
 				$table->string('email');
-				$table->text('address');
 				$table->integer('jobid');
 				$table->text('why');
 				$table->text('experience');
