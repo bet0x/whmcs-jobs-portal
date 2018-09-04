@@ -4,7 +4,7 @@
 * @package    WHMCS
 * @author     Matthew Watson
 * @copyright  Copyright (c) Matthew Watson
-* @version    2.0
+* @version    1.9
 * @link       https://www.base.envesko.com
 */
 
@@ -24,7 +24,7 @@ function jobs_config() {
 	$configArray = array(
 		"name" => "Jobs Portal",
 		"description" => "This addon allows you to add a job application system to your site.",
-		"version" => "2.0dev",
+		"version" => "1.9",
 		"author" => "Matthew Watson",
 		"language" => "english",
 		"fields" => array(

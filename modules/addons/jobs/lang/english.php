@@ -1,4 +1,13 @@
 <?php
+
+/**
+* @package    WHMCS
+* @author     Matthew Watson
+* @copyright  Copyright (c) Matthew Watson
+* @version    1.9
+* @link       https://www.base.envesko.com
+*/
+
 // ================= Admin panel language strings ======================
 $_ADDONLANG['addJobsWelcome'] = 'Add Vacant Jobs';
 $_ADDONLANG['viewJobsWelcome'] = 'View Jobs';

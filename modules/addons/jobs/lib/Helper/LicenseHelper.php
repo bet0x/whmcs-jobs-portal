@@ -1,5 +1,13 @@
 <?php
 
+/**
+* @package    WHMCS
+* @author     Matthew Watson, WHMCompleteSolution
+* @copyright  Copyright (c) Matthew Watson, WHMCompleteSolution
+* @version    1.9
+* @link       https://www.base.envesko.com
+*/
+
 namespace WHMCS\Module\Addon\Jobs\Helper;
 
 class LicenseHelper {

@@ -1,5 +1,13 @@
 <?php
 
+/**
+* @package    WHMCS
+* @author     Matthew Watson
+* @copyright  Copyright (c) Matthew Watson
+* @version    1.9
+* @link       https://www.base.envesko.com
+*/
+
 use WHMCS\View\Menu\Item as MenuItem;
 
 function jobs_addCSS(array $vars) {
