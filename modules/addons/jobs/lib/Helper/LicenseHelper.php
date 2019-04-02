@@ -19,10 +19,10 @@ class LicenseHelper {
 	    // -----------------------------------
 
 	    // Enter the url to your WHMCS installation here
-	    $whmcsurl = 'https://www.base.envesko.com/';
+	    $whmcsurl = '';
 	    // Must match what is specified in the MD5 Hash Verification field
 	    // of the licensing product that will be used with this check.
-	    $licensing_secret_key = 'jAG2hpM[Jjr#7\'Gw';
+	    $licensing_secret_key = '';
 	    // The number of days to wait between performing remote license checks
 	    $localkeydays = 10;
 	    // The number of days to allow failover for after local key expiry
