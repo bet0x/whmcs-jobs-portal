@@ -1,10 +1,6 @@
 
 WHMCS Jobs Addon v1.9 by Matthew Watson (Envesko Services)
 
-Copyright (C) Matthew Watson - All Rights Reserved  
-Unauthorized copying or modification of any of these files, via any medium, is strictly prohibited  
-Proprietary and confidential
-
 # Installation
 
 - Upload the "jobs" folder to the following location of your WHMCS instllation: /modules/addons/
