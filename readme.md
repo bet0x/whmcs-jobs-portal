@@ -11,7 +11,3 @@ WHMCS Jobs Addon v1.9 by Matthew Watson (Envesko Services)
 - You may change some more settings via the "Configure" button on the Addon Modules page
 - You can use the plugin by navigating to Addons > Jobs or going to http://yourSite.com/yourWHMCSInstallation/admin/addonmodules.php?module=jobs
 - The client area side of the addon can be viewed at http://yourSite.com/yourWHMCSInstallation/index.php?m=jobs
-
-# Support
-
-If you have any problems with the addon please open up a ticket at https://base.envesko.com/submitticket.php?step=2&deptid=4
